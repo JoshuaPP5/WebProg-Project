@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
+             $table->string('title');
+            $table->enum('type', ['article', 'video', 'tool'])->default('article');
+            $table->string('url');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

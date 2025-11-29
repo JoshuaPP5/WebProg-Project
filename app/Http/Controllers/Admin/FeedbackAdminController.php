@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Resource;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Feedback;
 
-class ResourceController extends Controller
+class FeedbackAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $resources = Resource::all();
-        return view('resources.index', compact('resources'));
+        $feedback = Feedback::with('tip')->latest()->paginate(10);
+        return view('admin.feedback.index', compact('feedback'));
     }
 
     /**
@@ -36,7 +36,7 @@ class ResourceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Resource $resource)
+    public function show(string $id)
     {
         //
     }
@@ -44,7 +44,7 @@ class ResourceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Resource $resource)
+    public function edit(string $id)
     {
         //
     }
@@ -52,7 +52,7 @@ class ResourceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Resource $resource)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -60,8 +60,9 @@ class ResourceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Resource $resource)
+    public function destroy(Feedback $feedback)
     {
-        //
+        $feedback->delete();
+        return redirect('/admin/feedback')->with('success', 'Feedback deleted.');
     }
 }

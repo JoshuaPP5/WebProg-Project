@@ -47,6 +47,22 @@
                             {{ $tip->title }}
                         </h3>
 
+                        {{-- Average Rating --}}
+                        @php
+                            $avg = $tip->averageRating() ?? 0;
+                        @endphp
+
+                        <div class="flex items-center gap-1 mb-2">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <span class="{{ $i <= $avg ? 'text-yellow-400' : 'text-gray-300' }}">
+                                    ★
+                                </span>
+                            @endfor
+                            <span class="text-sm text-gray-600">
+                                ({{ number_format($avg, 1) }})
+                            </span>
+                        </div>
+
                         {{-- Short Description --}}
                         <p class="text-gray-700 text-sm mb-4">
                             {{ Str::limit($tip->description, 100) }}

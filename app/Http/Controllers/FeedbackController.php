@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feedback;
+use App\Models\Tip;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -19,9 +20,10 @@ class FeedbackController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($tip_id)
     {
-        //
+        $tip = Tip::findOrFail($tip_id);
+        return view('feedback.create', compact('tip'));
     }
 
     /**
@@ -29,7 +31,16 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'tip_id' => 'required|exists:tips,id',
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'nullable|max:500',
+        ]);
+
+        Feedback::create($validated);
+
+        return redirect('/tips/' . $request->tip_id)
+               ->with('success', 'Thank you for your feedback!');
     }
 
     /**

@@ -89,6 +89,76 @@
                 </a>
             </div>
 
+            {{-- Feedback Section --}}
+            <div class="mt-10 bg-gray-50 rounded-xl p-6 border">
+
+                <h2 class="text-2xl font-bold mb-4">User Feedback</h2>
+
+                {{-- Average Rating --}}
+                @if($average)
+                    <div class="flex items-center gap-1 mb-6">
+                        @for ($i = 1; $i <= 5; $i++)
+                            <span class="{{ $i <= $average ? 'text-yellow-400' : 'text-gray-300' }}">
+                                ★
+                            </span>
+                        @endfor
+                        <span class="text-gray-700 text-lg font-semibold">
+                            {{ $average }}/5
+                        </span>
+                    </div>
+                @endif
+
+                {{-- Sorting --}}
+                <div class="flex justify-end mb-4">
+                    <form>
+                        <label class="text-gray-700 font-semibold mr-2">Sort by:</label>
+                        <select name="sort" onchange="this.form.submit()" 
+                                class="border rounded p-2 text-sm">
+                            <option value="newest" {{ request('sort')=='newest'?'selected':'' }}>Newest</option>
+                            <option value="oldest" {{ request('sort')=='oldest'?'selected':'' }}>Oldest</option>
+                            <option value="highest" {{ request('sort')=='highest'?'selected':'' }}>Highest Rating</option>
+                            <option value="lowest" {{ request('sort')=='lowest'?'selected':'' }}>Lowest Rating</option>
+                        </select>
+                    </form>
+                </div>
+
+                {{-- Feedback List --}}
+                @if($feedback->count() > 0)
+                    <div class="space-y-4">
+
+                        @foreach($feedback as $fb)
+                            <div class="bg-white p-4 rounded-xl shadow">
+
+                                {{-- Stars --}}
+                                <div class="flex items-center gap-1 mb-2">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <span class="{{ $i <= $fb->rating ? 'text-yellow-400' : 'text-gray-300' }}">
+                                            ★
+                                        </span>
+                                    @endfor
+                                    <span class="text-sm text-gray-600">({{ $fb->rating }})</span>
+                                </div>
+
+                                {{-- Comment --}}
+                                @if($fb->comment)
+                                    <p class="text-gray-700">{{ $fb->comment }}</p>
+                                @endif
+
+                                <p class="text-xs text-gray-400 mt-2">{{ $fb->created_at->diffForHumans() }}</p>
+                            </div>
+                        @endforeach
+
+                        {{-- PAGINATION --}}
+                        <div class="mt-6">
+                            {{ $feedback->links() }}
+                        </div>
+
+                    </div>
+                @else
+                    <p class="text-gray-600">No feedback yet. Be the first to rate this tip!</p>
+                @endif
+
+            </div>
         </div>
 
     </section>

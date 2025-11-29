@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('feedback', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tip_id')->constrained()->onDelete('cascade');
+            $table->integer('rating');
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

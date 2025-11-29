@@ -16,4 +16,15 @@ class Tip extends Model
         'energy_saving',
         'image',
     ];
+
+    public function feedback()
+    {
+        return $this->hasMany(Feedback::class);
+    }
+
+    public function averageRating()
+    {
+        return $this->feedback()->avg('rating');
+    }
+
 }

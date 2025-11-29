@@ -40,10 +40,34 @@ class TipController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Tip $tip)
     {
-        $tip = Tip::findOrFail($id);
-        return view('tips.show', compact('tip'));
+        $sort = request('sort', 'newest'); // default sorting
+
+        $query = $tip->feedback();
+
+        switch ($sort) {
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+
+            case 'highest':
+                $query->orderBy('rating', 'desc');
+                break;
+
+            case 'lowest':
+                $query->orderBy('rating', 'asc');
+                break;
+
+            default: // newest
+                $query->orderBy('created_at', 'desc');
+        }
+
+        $feedback = $query->paginate(5)->withQueryString();
+
+        $average = round($tip->averageRating(), 1);
+
+        return view('tips.show', compact('tip', 'feedback', 'average'));
     }
 
     /**
