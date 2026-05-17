@@ -1,59 +1,189 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌱 Clean Energy Tips
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A web-based platform for browsing, managing, and learning about clean energy and sustainable living practices. Built with Laravel (PHP), it provides an interactive interface for users to explore eco-friendly tips and resources, submit feedback, and for administrators to manage content.
 
-## About Laravel
+**🔗 Live Demo:** [clean-energy-tips.page.gd](https://clean-energy-tips.page.gd) &nbsp;|&nbsp; **📽️ Demo Video:** [Watch on YouTube](https://youtu.be/1pAyYn_lE4g)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📋 Table of Contents
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [About](#about)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Database Schema](#database-schema)
+- [Pages & Roles](#pages--roles)
+- [Team](#team)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## About
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Clean Energy Tips addresses the difficulty of finding clear, accessible guidance on renewable energy and eco-friendly living. The platform gathers clean energy insights into one hub, presenting information in digestible formats with a simple navigation layout — lowering the barrier for everyday readers to build sustainable habits.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Features
 
-### Premium Partners
+| Feature | Description |
+|---|---|
+| User Registration & Auth | Sign up, log in, and log out with secure password hashing |
+| Browse Tips | View a structured list of clean energy tips with details, images, and ratings |
+| Browse Resources | Access curated external articles, videos, and tools |
+| Feedback & Ratings | Submit star ratings and comments on tips; average ratings are displayed |
+| Image Uploads | Administrators can attach images to tips |
+| Admin Dashboard | Full CRUD management of tips, resources, and user feedback |
+| Role-Based Access | Separate interfaces and permissions for regular users and administrators |
+| Responsive Design | Bootstrap 5 layout that adapts across devices |
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## Tech Stack
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Layer | Technology |
+|---|---|
+| Front-End | HTML5, CSS3, Bootstrap 5, Blade templating |
+| Back-End | PHP with Laravel ^12.0 |
+| Database | SQLite / MySQL via Laravel Eloquent ORM & Migrations |
+| Dev Tools | VS Code, Git, Composer, npm |
+| Web Server | Laravel built-in dev server / Apache-compatible |
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Project Structure
 
-## Security Vulnerabilities
+```
+WebProg-Project/
+├── app/
+│   ├── Http/Controllers/   # Request handling (Tips, Resources, Feedback, Auth)
+│   └── Models/             # Eloquent models: User, Tip, Resource, Feedback
+├── database/
+│   ├── migrations/         # Schema definitions
+│   └── seeders/            # Initial data
+├── resources/
+│   └── views/              # Blade templates (public pages + admin panel)
+├── routes/
+│   └── web.php             # URL-to-controller mappings
+├── public/                 # Public assets (images, compiled CSS/JS)
+├── storage/                # Uploaded files
+└── tests/                  # Automated tests
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
+
+## Getting Started
+
+### Prerequisites
+
+- PHP >= 8.2
+- Composer
+- Node.js & npm
+- MySQL or SQLite
+
+### Installation
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/JoshuaPP5/WebProg-Project.git
+cd WebProg-Project
+
+# 2. Install PHP dependencies
+composer install
+
+# 3. Install JS dependencies
+npm install && npm run build
+
+# 4. Set up environment
+cp .env.example .env
+php artisan key:generate
+
+# 5. Configure your database in .env, then run migrations
+php artisan migrate
+
+# 6. (Optional) Seed initial data
+php artisan db:seed
+
+# 7. Create the storage symlink for file uploads
+php artisan storage:link
+
+# 8. Start the development server
+php artisan serve
+```
+
+The app will be available at `http://localhost:8000`.
+
+---
+
+## Database Schema
+
+The application uses four core tables:
+
+| Table | Primary Key | Foreign Keys | Purpose |
+|---|---|---|---|
+| `users` | `id` | — | Registered user accounts for authentication |
+| `tips` | `id` | — | Clean energy tips with descriptions, benefits, and images |
+| `resources` | `id` | — | External links to articles, videos, and tools |
+| `feedback` | `id` | `tip_id → tips.id`, `user_id → users.id` | User ratings and optional comments per tip |
+
+**Relationships:**
+- One Tip → many Feedback entries
+- One User → many Feedback entries
+
+---
+
+## Pages & Roles
+
+### Public / User Pages
+
+| Page | Description |
+|---|---|
+| Home | Landing page introducing the platform and clean energy overview |
+| Tips | Browsable list of tips; click any tip to see full details, images, and ratings |
+| Resources | Curated external links for deeper learning |
+| About | Background on the project's purpose and goals |
+| Login / Sign Up | Authentication pages for account access |
+
+### Admin Pages
+
+| Page | Description |
+|---|---|
+| Admin Dashboard | Overview and navigation for all admin functions |
+| Manage Tips | Create, edit, and delete clean energy tips (with image upload) |
+| Manage Resources | Create, edit, and delete external resources |
+| Manage Feedback | Review and moderate user-submitted ratings and comments |
+
+---
+
+## Team
+
+**Group 5 — Web Programming Project**
+
+| Name | Student ID | Role |
+|---|---|---|
+| Clara Jessica | 2702267520 | Team Leader / Video Editor / Ideator / Coordinator |
+| Joshua Putra Pratama | 2702238792 | Back-End Developer / Project Author |
+| Reynaldi Anantyo | 2702242940 | Front-End Developer |
+| Revidio Kieran | 2702278184 | Front-End Support Developer |
+| Jeffkins Andrew Likadinata | 2702255893 | Documentation & Demo Presenter |
+
+---
+
+## Development Timeline
+
+| Phase | Period |
+|---|---|
+| Planning & Requirement Analysis | Week 1–2 |
+| System Design | Week 3 |
+| UI Design | Week 4 |
+| Implementation | Week 5–9 |
+| Testing | Week 10–11 |
+| Deployment | Week 12 |
+| Documentation & Demo | Week 13 |
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project was developed as an academic web programming assignment. The underlying Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
